@@ -85,7 +85,7 @@ static char	*update_static(char *buffer)
 	return (buffer_static);
 }
 
-/* char	*get_next_line(int fd)
+char	*get_next_line_bonus(int fd)
 {
 	static char	*buffer[MAX_FD];
 	ssize_t		bytes_read;
@@ -110,7 +110,7 @@ static char	*update_static(char *buffer)
 	line = get_line(buffer[fd]);
 	buffer[fd] = update_static(buffer[fd]);
 	return (line);
-} */
+}
 
 /* #include <stdio.h>
 int main() {
@@ -118,23 +118,23 @@ int main() {
 	int fd2 = open("text.txt", O_RDONLY);
 
 	if (fd1 < 0 || fd2 < 0) {
-		perror("Error opening files");
+		perror("Error opening ");
 		return (1);
 	}
-	char *line1 = get_next_line(fd1);
-	char *line2 = get_next_line(fd2);
+	char *line1 = get_next_line_bonus(fd1);
+	char *line2 = get_next_line_bonus(fd2);
 	while ((line1) != NULL || (line2) != NULL)
 	{
 		if (line1) {
-			printf("FD1: %s", line1);
+			ft_printf("FD1: %s", line1);
 			free(line1);
 		}
 		if (line2) {
-			printf("FD2: %s", line2);
+			ft_printf("FD2: %s", line2);
 			free(line2);
 		}
-		line1 = get_next_line(fd1);
-		line2 = get_next_line(fd2);
+		line1 = get_next_line_bonus(fd1);
+		line2 = get_next_line_bonus(fd2);
 	}
 
 	close(fd1);

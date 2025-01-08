@@ -81,5 +81,6 @@ int		ft_var_opt(va_list args, const char format);
 size_t	ft_putnbr_hex(size_t n, int uppercase);
 size_t	ft_putptr(size_t ptr);
 char	*get_next_line(int fd);
+char	*get_next_line_bonus(int fd);
 
 #endif

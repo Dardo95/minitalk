@@ -3,6 +3,6 @@
 
 # include <signal.h>
 # include <unistd.h>
-# include "../libf/libft.h"
+# include "../libft/libft.h"
 
 #endif

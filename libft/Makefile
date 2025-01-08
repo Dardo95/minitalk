@@ -48,7 +48,9 @@ SRC =           ft_atoi.c \
                 ft_strtrim.c \
                 ft_substr.c \
                 ft_tolower.c \
-                ft_toupper.c
+                ft_toupper.c \
+                get_next_line.c \
+                get_next_line_bonus.c \
 
 BUILD_DIR = build
 OBJ = $(addprefix $(BUILD_DIR)/, $(SRC:.c=.o))
