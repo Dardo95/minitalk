@@ -1,18 +1,54 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   client.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: enogueir <enogueir@student.42madrid>       +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/01/10 17:13:29 by enogueir          #+#    #+#             */
+/*   Updated: 2025/01/10 17:54:13 by enogueir         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "include/minitalk.h"
 
-static void	send_char(pid_t server_pid, char c)
+static volatile sig_atomic_t	g_ack_received = 0;
+
+static void	ack_handler(int signal)
+{
+	(void)signal;
+	g_ack_received = 1;
+}
+
+static int	validate_pid(char *pid)
 {
 	int	i;
 
-	i = 7;
-	while(i >= 0)
+	i = 0;
+	while (pid[i])
 	{
-		if ((c >> i) & 1)
+		if (!ft_isdigit(pid[i]))
+			return 0;
+		i++;
+	}
+	return (1);
+}
+
+static void	send_char(pid_t server_pid, unsigned char c)
+{
+	int	bit;
+
+	bit = 7;
+	while (bit >= 0)
+	{
+		g_ack_received = 0;
+		if ((c >> bit) & 1)
 			kill(server_pid, SIGUSR2);
 		else
 			kill(server_pid, SIGUSR1);
-		usleep(100);
-		i--;
+		while(!g_ack_received)
+			;
+		bit--;
 	}
 }
 
@@ -30,14 +66,18 @@ int	main(int argc, char **argv)
 {
 	pid_t	server_pid;
 	
-	if (argc != 3)
-		ft_putstr_fd("Uso: ./client <PID> <mensaje>\n",1);
-	server_pid = ft_atoi(argv[1]);
-	if (server_pid <= 0)
+	if (argc != 3 || !ft_strlen(argv[2]) || !validate_pid(argv[1]))
 	{
-		ft_putstr_fd("Error: Pid Invalido", 2);
+		ft_putstr_fd("\x1b[31mERROR!\xb1[0m\n", 2);
+		ft_putstr_fd("Format: ./client <PID> <menssage>\n",2);
 		return (1);
 	}
+	server_pid = ft_atoi(argv[1]);
+	signal(SIGUSR1, ack_handler);
+	ft_printf("Sending message to PID server: %d\n", server_pid);
+	sleep(2);
 	send_message(server_pid, argv[2]);
+	sleep(2);
+	ft_printf("Message sent");
 	return (0);
 }
