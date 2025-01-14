@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   client.c                                           :+:      :+:    :+:   */
+/*   client_bonus.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: enogueir <enogueir@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/01/10 17:13:29 by enogueir          #+#    #+#             */
-/*   Updated: 2025/01/14 16:04:31 by enogueir         ###   ########.fr       */
+/*   Created: 2025/01/14 15:17:16 by enogueir          #+#    #+#             */
+/*   Updated: 2025/01/14 15:20:40 by enogueir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ int	main(int argc, char **argv)
 
 	if (argc != 3 || !ft_strlen(argv[2]) || !validate_pid(argv[1]))
 	{
-		ft_putstr_fd("\x1b[31mERROR!\x1b[0m\n", 2);
+		ft_putstr_fd("\x1b[31mERROR!\xb1[0m\n", 2);
 		ft_putstr_fd("Format: ./client <PID> <menssage>\n", 2);
 		return (1);
 	}

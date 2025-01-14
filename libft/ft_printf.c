@@ -6,7 +6,7 @@
 /*   By: enogueir <enogueir@student.42madrid>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/31 12:59:36 by enogueir          #+#    #+#             */
-/*   Updated: 2024/11/07 16:54:02 by enogueir         ###   ########.fr       */
+/*   Updated: 2025/01/14 14:54:09 by enogueir         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,9 +60,9 @@ int	ft_printf(char const *str, ...)
 	return (len);
 }
 
-#include <stdio.h>
+/*#include <stdio.h>
 
-/* int	main(void)
+int	main(void)
 {
 	int original_print_return;
 	int fake_print_return;
